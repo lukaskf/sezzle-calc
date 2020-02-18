@@ -2,11 +2,13 @@ from flask import *
 from forms import CalculationForm
 from flask_sqlalchemy import SQLAlchemy 
 import math
+import os
 
 #Configuration
 app = Flask(__name__)
 app.config.from_object("config.Config")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'calculations.db')
 db = SQLAlchemy(app)
 
 #Models
