@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    	<h1>Enter Your Calculation!</h1>
+    	<p>Valid Operators: + - * / % pow log</p>
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <!--Calcluation Forms-->
+    	<form action="" method="post" novalidate>
+    		{{ form.hidden_tag() }}
+    		<p>
+    			{{ form.firstArgument.label }}<br>
+    			{{ form.firstArgument(size=32) }}
+    			{% for error in form.firstArgument.errors %}
+            	<span style="color: red;">[{{ error }}]</span>
+            	{% endfor %}
+    		</p>
+    		<p>
+    			{{ form.operator.label }}<br>
+    			{{ form.operator(size=32) }}
+    			{% for error in form.operator.errors %}
+            	<span style="color: red;">[{{ error }}]</span>
+            	{% endfor %}
+    		</p>
+    		<p>
+    			{{ form.secondArgument.label }}<br>
+    			{{ form.secondArgument(size=32) }}
+    			{% for error in form.secondArgument.errors %}
+            	<span style="color: red;">[{{ error }}]</span>
+            	{% endfor %}
+    		</p>
+    		<p>{{ form.submit() }}</p>
+    	</form>
+        <h1>LAST TEN CALCULATIONS:</h1>
+        <!--  Calculation Entry Table  --> 
+        {% for entry in calculations %}
+        <div><p>{{ entry.result }}</b></p></div>
+        {% endfor %}
+    </body>
+</html>
