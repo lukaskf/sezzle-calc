@@ -36,8 +36,11 @@ def index():
 		return redirect(url_for('index'))
 	calculations = Entry.query.all()
 	length = len(calculations)
-	calculations = calculations[(length-9):]
-	calculations.reverse()
+	if(len(calculations)>=10):
+		calculations = calculations[(length-10):]
+		calculations.reverse()
+	else:
+		calculations.reverse()
 	return render_template('index.html', title='index', form=form, calculations = calculations) #calculations = db.query...
 
 #Functions
